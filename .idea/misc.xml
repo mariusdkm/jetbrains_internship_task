@@ -1,0 +1,10 @@
+<project version="4">
+  <component name="Black">
+    <option name="sdkName" value="Python 3.11 (jetbrains_internship_local)" />
+  </component>
+  <component name="DiscordProjectSettings">
+    <option name="show" value="ASK" />
+    <option name="description" value="" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.11.6 (sftp://deep@arion:22/home/deep/.virtualenvs/jetbrains_internship_local/bin/python)" project-jdk-type="Python SDK" />
+</project>

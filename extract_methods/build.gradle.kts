@@ -1,0 +1,21 @@
+plugins {
+    id("java")
+}
+
+group = "com.unexcellent"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation("com.github.javaparser:javaparser-core-serialization:3.25.7")
+    implementation("org.json:json:20231013")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
