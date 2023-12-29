@@ -17,9 +17,26 @@ import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
+    /**
+     * Extracts all methods from the IntelliJ Community source code and saves them in JSON format.
+     * <p>
+     * The JSON format is as follows:
+     * <p>
+     * [
+     * {
+     * "name": "method name",
+     * "method": "method body",
+     * "hasBody": true/false
+     * },
+     * ...
+     * ]
+     * <p>
+     * The "hasBody" field indicates whether the method has a body or not. This is useful to filter out abstract methods.
+     * <p>
+     * Some methods cannot be parsed by JavaParser. These methods are skipped, even without them it's still possible to extract more than 120k methods.
+     */
     public static void main(String[] args) throws IOException {
         // Replace this with the path to the IntelliJ Community source code
-//        String sourceCodePath = "intellij-community/java";
         String sourceCodePath = "intellij-community/java";
 
         // Replace this with the path where you want to save the extracted methods in JSON format
@@ -57,6 +74,7 @@ public class Main {
                             methodVisitor.visit(cu.getResult().orElseThrow(), null);
                             countSuccess.getAndIncrement();
                         } else {
+                            // We skip files that cannot be parsed
                             System.out.println("Error in " + path);
                             countFail.getAndIncrement();
                         }
@@ -94,9 +112,6 @@ public class Main {
 //                jsonObject.put("class", n.findAncestor(Node.TreeTraversal.PARENTS, com.github.javaparser.ast.body.ClassOrInterfaceDeclaration.class).get().getNameAsString());
 
                 fileWriter.write(jsonObject + ",\n");
-
-                // Write the method as a JSON object
-//                fileWriter.write("{ \"name\": \"" + n.getNameAsString() + "\", \"body\": \"" + escapedBody + "\" },\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
